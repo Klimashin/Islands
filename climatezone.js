@@ -7,4 +7,8 @@ ClimateZone.prototype.addIsland = function(island) {
 	this.islands.push(island);
 }
 
+ClimateZone.prototype.destroyIsland = function(id) {
+
+}
+
 module.exports = ClimateZone;
