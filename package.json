@@ -1,0 +1,8 @@
+{
+	"name": "Islands",
+	"version": "0.0.1",
+	"description": "prototype multiplayer game about falling Islands",
+	"dependencies": {
+		"stochasm": "~0.5"
+	}
+}
