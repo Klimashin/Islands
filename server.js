@@ -1,7 +1,6 @@
-var World = require('./world');
+var World = require('./game_objects/world');
 
 worldConfig = {
-	climateZonesNum: 10,
 	islandsNum: 10
 }
 

@@ -1,0 +1,46 @@
+{
+	"1":{
+		"modifier": "-5",
+		"name": "zone1" 
+	},
+	"2":{
+		"modifier": "-4",
+		"name": "zone2" 
+	},
+	"3":{
+		"modifier": "-3",
+		"name": "zone3" 
+	},
+	"4":{
+		"modifier": "-2",
+		"name": "zone4" 
+	},
+	"5":{
+		"modifier": "-1",
+		"name": "zone5" 
+	},
+	"6":{
+		"modifier": "0",
+		"name": "zone6" 
+	},
+	"7":{
+		"modifier": "1",
+		"name": "zone7" 
+	},
+	"8":{
+		"modifier": "2",
+		"name": "zone8" 
+	},
+	"9":{
+		"modifier": "3",
+		"name": "zone9" 
+	},
+	"10":{
+		"modifier": "4",
+		"name": "zone10" 
+	},
+	"11":{
+		"modifier": "5",
+		"name": "zone11" 
+	}
+}
