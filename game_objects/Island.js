@@ -2,18 +2,14 @@ var stochasm = require('stochasm');
 var islandId = 0;
 
 function Island(climateZone) {
-	var randomGenerator = stochasm({
-		kind: "integer",
-		min: 1,
-		max: 3
-	});
-
 	this['id'] = islandId++;
 	this.climatezone = climateZone;
-	this.fallingSpeed = randomGenerator.next();
+	this.fallingSpeed = stochasm({kind: "integer", min: 1, max: 3 }).next();
 	this.timeToLive = this.fallingSpeed;
-	//generate resources
-	//generate falling speed
+
+	for (var i = 0; i < stochasm({kind: "integer", min: 2, max: 5}).next(); i++) {
+		//generate resource
+	}
 }
 
 Island.prototype.fall = function() {

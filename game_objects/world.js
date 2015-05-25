@@ -13,9 +13,7 @@ function World(globalConfig) {
 }
 
 World.prototype._createClimateZones = function () {
-	var climateZonesData = JSON.parse(fs.readFileSync('./data/climate_zones.json', 'utf8'));
-
-	for (var id in climateZonesData) {
+	for (var id in global.climateZonesData) {
 		this.climateZones[id] = new ClimateZone(climateZonesData[id], id);
 	}
 }
