@@ -1,4 +1,6 @@
-function Resource(id, data) {
+function Resource(id) {
+	var data = global.resourcesData[id];
+
 	this.resourceId = id;
 	this.name = data.name;
 	this.chance = data.chance;

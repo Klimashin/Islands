@@ -34,12 +34,22 @@ World.prototype._generateIslands = function() {
 }
 
 World.prototype.addIsland = function(island) {
-	console.log(island);
+	console.log(island, island.resources);
 	this.islands[island['id']] = island;
 }
 
 World.prototype.destroyIsland = function(id) {
 	delete this.islands[id];
+}
+
+World.prototype.moveIslands = function() {
+	for (var id in this.islands) {
+		this.islands[id].fall();
+	}
+}
+
+World.prototype.turnPassed = function(turnNumber) {
+
 }
 
 module.exports = World;

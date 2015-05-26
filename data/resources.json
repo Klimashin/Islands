@@ -1,14 +1,14 @@
 {
 	"forest": {
-		"chance": "0.5",
+		"weight": "0.5",
 		"name": "Лес"
 	},
 	"iron": {
-		"chance": "0.3",
+		"weight": "0.35",
 		"name": "Железо"
 	},
 	"gold": {
-		"chance": "0.1",
+		"weight": "0.15",
 		"name": "Золото"
 	}
 }
