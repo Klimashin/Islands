@@ -5,4 +5,7 @@ global.resourcesData = JSON.parse(fs.readFileSync('./data/resources.json', 'utf8
 var Game = require('./game_objects/game');
 
 var game = new Game();
-console.log(game);
+
+for (var i = 0; i < 100; i++) {
+ 	game.endTurn();	
+}

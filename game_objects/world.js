@@ -1,25 +1,22 @@
-var ClimateZone = require('./climatezone');
+var climateZones = require('./climatezone');
 var stochasm = require('stochasm');
 var Island = require('./Island');
 var fs = require('fs');
 
-function World(globalConfig) {
+function World(globalConfig, eventEmitter) {
 	this.globalConfig = globalConfig;
 	this.climateZones = {};
 	this.islands = {};
+	this.ee = eventEmitter;
 
-	this._createClimateZones();
+	this.ee.on('turnPassed', this._turnPassed.bind(this));
+
 	this._generateIslands();
 }
 
-World.prototype._createClimateZones = function () {
-	for (var id in global.climateZonesData) {
-		this.climateZones[id] = new ClimateZone(climateZonesData[id], id);
-	}
-}
-
 World.prototype._generateIslands = function() {
-	var climateZonesNum = Object.keys(this.climateZones).length;
+	var climateZonesNum = Object.keys(climateZones).length;
+
 	var normalGenerator = stochasm({
 		kind: "integer",
 		mean: Math.floor(climateZonesNum / 2), 
@@ -29,27 +26,30 @@ World.prototype._generateIslands = function() {
 	});
 
 	for (var i = 0; i < this.globalConfig.islandsNum; i++) {
-		this.addIsland(new Island(this.climateZones[normalGenerator.next()]));
+		this.addIsland(new Island(this.ee, normalGenerator.next()));
 	}
 }
 
 World.prototype.addIsland = function(island) {
-	console.log(island, island.resources);
 	this.islands[island['id']] = island;
 }
 
 World.prototype.destroyIsland = function(id) {
+	if (this.islands[id].ownerId) {
+		this.ee.emit('gameLose', {
+			'playerId': this.islands[id].ownerId,
+			'reason': 'islandHaveFallen'
+		})
+	}
+	console.log('destroying island ' + id);
 	delete this.islands[id];
 }
 
-World.prototype.moveIslands = function() {
+World.prototype._turnPassed = function(turn) {
+	console.log('passed turn ' + turn);
 	for (var id in this.islands) {
 		this.islands[id].fall();
 	}
-}
-
-World.prototype.turnPassed = function(turnNumber) {
-
 }
 
 module.exports = World;

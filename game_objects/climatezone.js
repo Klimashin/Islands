@@ -4,4 +4,9 @@ function ClimateZone(zoneData, zoneId) {
 	this.name = zoneData.name;
 }
 
-module.exports = ClimateZone;
+var climateZones = [];
+for (var id in global.climateZonesData) {
+	climateZones[id] = new ClimateZone(climateZonesData[id], id);
+}
+
+module.exports = climateZones;
