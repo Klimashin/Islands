@@ -5,17 +5,19 @@ worldConfig = {
 	islandsNum: 10
 }
 
-function Game() {
+function Game(io) {
 	this.ee = new EventEmitter();
+	this.io = io;
 	this.world = new World(worldConfig, this.ee);
 	this.players = [];
 	this.turn = 0;
+	this.messages = '';
 
 	this.ee.on('islandHaveFallen', this.processIslandHaveFallen.bind(this));
 
 	this.ee.on('gameLose', this.processGameLose.bind(this));
 
-	this.ee.on('islandClimateZoneChanged', function (data) {console.log('island ' + data.id + ' climate zone changed to ' + data.name)});
+	this.ee.on('islandClimateZoneChanged', this.processClimateZoneChanged.bind(this));
 }
 
 Game.prototype.addPlayer = function(player) {
@@ -34,6 +36,11 @@ Game.prototype.processIslandHaveFallen = function(islandId) {
 
 Game.prototype.processGameLose = function(eventData) {
 	//implement me
+}
+
+Game.prototype.processClimateZoneChanged = function (data) {
+	var message = 'island ' + data.id + ' climate zone changed to ' + data.name;
+	this.io.emit('game-message', message);
 }
 
 module.exports = Game;

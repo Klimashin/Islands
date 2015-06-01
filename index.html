@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script>
+	var socket = io();
+	socket.on('game-message', function(message) {
+		$('body>span').append(message);
+	});
+	</script>
+</head>
+<body>
+	<h1>TEST</h1>
+	<span></span>
+</body>
+</html>

@@ -1,8 +1,13 @@
 {
-	"name": "Islands",
-	"version": "0.0.1",
-	"description": "prototype multiplayer game about falling Islands",
-	"dependencies": {
-		"stochasm": "~0.5"
-	}
+  "name": "Islands",
+  "version": "0.0.1",
+  "description": "prototype multiplayer game about falling Islands",
+  "dependencies": {
+    "express": "^4.12.4",
+    "express-session": "^1.11.2",
+    "mime": "~1.2.7",
+    "socket.io": "~1.0.0",
+    "stochasm": "~0.5",
+    "session.socket.io": "*"
+  }
 }
