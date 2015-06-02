@@ -6,12 +6,21 @@
 	<script>
 	var socket = io();
 	socket.on('game-message', function(message) {
-		$('body>span').append(message);
+		$('#console').append(message + '<br/>');
+	});
+	$(function () {
+		$('body button').click(function() {
+			console.log('here');
+			socket.emit('start-game', '');
+		});
 	});
 	</script>
 </head>
 <body>
 	<h1>TEST</h1>
-	<span></span>
+	<button>Start Game</button>
+	<div id="console" style="width: 800px; overflow-x: none; overflow-y: scroll; height: 800px;">
+		
+	</div>
 </body>
 </html>

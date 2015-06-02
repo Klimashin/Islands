@@ -8,22 +8,30 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.get('/', function (req, res) {	
-  	res.sendFile(path.join(__dirname, 'index.html'));
-
-  	var Game = require('./game_objects/game');
-
-	var game = new Game(io);
-
-	for (var i = 0; i < 100; i++) {
-	 	game.endTurn();	
-	}
+  	res.sendFile(path.join(__dirname, 'index.html'));  	
 });
 
-io.on('connection', function(socket){
+io.on('connection', function(socket) {
 	console.log('a user connected');
+
 	socket.on('disconnect', function(){
 	    console.log('user disconnected');
   	});
+
+  	socket.on('new-game', function(socket) {
+		console.log('game-started');
+		var Game = require('./game_objects/game');
+
+		var game = new Game(io);
+
+		for (var i = 0; i < 100; i++) {
+		 	game.endTurn();	
+		}
+	});
+
+	scoket.on('turn-passed', function() {
+		
+	})
 });
 
 http.listen(3000, function(){
