@@ -5,11 +5,14 @@ var path = require('path');
 global.climateZonesData = JSON.parse(fs.readFileSync('./data/climate_zones.json', 'utf8'));
 global.resourcesData = JSON.parse(fs.readFileSync('./data/resources.json', 'utf8'));
 
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 
+app.use(express.static('public'));
+
 app.get('/', function (req, res) {	
-  	res.sendFile(path.join(__dirname, 'index.html'));  	
+  	res.sendFile(path.join(__dirname, 'public/index.html'));  	
 });
 
 http.listen(3000, function(){

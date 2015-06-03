@@ -49,22 +49,12 @@ Game.prototype.processClimateZoneChanged = function (data) {
 	this.io.emit('game-message', message);
 }
 
-Game.prototype.start = function(player) {
-	if (player.socket.id != this.creator.socket.id) {
-		console.log('trying to start new game not by creator')
-		return false;
-	}
-
-	for (id in this.players) {
-		if (!this.players[id].readyState) {
-			console.log('some of the players are not ready');
-			return false;
-		}
-	}
-	console.log('Numaber of players ' + this.players.length);
+Game.prototype.start = function() {
 	this.started = true;
-
-	console.log('game started')
+	console.log('game started');
+	for (id in this.palyers) {
+		this.players[id].socket.emit('game-message', 'GAME STARTED');
+	}
 }
 
 module.exports = Game;
