@@ -5,20 +5,47 @@
 	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 	<script>
 	var socket = io();
+	var currentGameId = null;
+
 	socket.on('game-message', function(message) {
 		$('#console').append(message + '<br/>');
 	});
+
+	socket.on('assign-game-id', function(gameId) {
+		console.log('assigning game id ' + gameId);
+		currentGameId = gameId;
+	});
+
 	$(function () {
-		$('body button').click(function() {
-			console.log('here');
-			socket.emit('start-game', '');
+		$('#register').click(function() {
+			socket.emit('register');
+		});
+
+		$('#create').click(function() {
+			socket.emit('new-game');
+		});
+
+		$('#join').click(function() {
+			socket.emit('join-game', 0);
+		});
+
+		$('#change-state').click(function() {
+			socket.emit('change-ready-state');
+		});
+
+		$('#start').click(function() {
+			socket.emit('start-game', currentGameId);
 		});
 	});
 	</script>
 </head>
 <body>
 	<h1>TEST</h1>
-	<button>Start Game</button>
+	<button id="register">Register</button>
+	<button id="create">Create</button>
+	<button id="join">Join</button>
+	<button id="change-state">Change ready state</button>
+	<button id="start">Start</button>
 	<div id="console" style="width: 800px; overflow-x: none; overflow-y: scroll; height: 800px;">
 		
 	</div>
