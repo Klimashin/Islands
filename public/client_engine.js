@@ -3,8 +3,6 @@ var ClientEngine = function(socket) {
 	this.socket = socket;
 	this.currentGameId = null;
 
-	
-
 	this.renderMsg = function (message) {
 		$('#console').append(message + '<br/>');
 	}
@@ -27,7 +25,7 @@ var ClientEngine = function(socket) {
 		});
 
 		$('#start').click(function() {
-			socket.emit('start-game', currentGameId);
+			socket.emit('start-game', self.currentGameId);
 		});
 	}
 

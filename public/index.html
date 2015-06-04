@@ -16,4 +16,12 @@
 		
 	</div>
 </body>
+<script>
+	var socket = io();
+	var gameEngine = new ClientEngine(socket);
+
+	$(function() {
+		gameEngine.initListners();
+	});
+</script>
 </html>

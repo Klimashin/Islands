@@ -12,9 +12,11 @@ function Game(io, player) {
 	this.creator = player;
 	this['id'] = gameId++;
 	this.started = false;
+	this.players = [];
+
+	this.addPlayer(player);
 
 	this.world = new World(worldConfig, this.ee);
-	this.players = [this.creator];
 	this.turn = 0;
 	this.messages = '';
 
@@ -52,7 +54,7 @@ Game.prototype.processClimateZoneChanged = function (data) {
 Game.prototype.start = function() {
 	this.started = true;
 	console.log('game started');
-	for (id in this.palyers) {
+	for (id in this.players) {
 		this.players[id].socket.emit('game-message', 'GAME STARTED');
 	}
 }
