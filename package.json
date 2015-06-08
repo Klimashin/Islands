@@ -6,8 +6,9 @@
     "express": "^4.12.4",
     "express-session": "^1.11.2",
     "mime": "~1.2.7",
+    "node-uuid": "^1.4.3",
+    "session.socket.io": "*",
     "socket.io": "~1.0.0",
-    "stochasm": "~0.5",
-    "session.socket.io": "*"
+    "stochasm": "~0.5"
   }
 }
