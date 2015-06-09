@@ -7,11 +7,11 @@ var ClientEngine = function(socket) {
 		$('#console').append(message + '<br/>');
 	}
 
-	this.initListners = function() {
-		$('#register').click(function() {
-			socket.emit('register');
-		});
+	this.registerPlayer = function(nick) {
+		this.socket.emit('register', nick);
+	}
 
+	this.initListners = function() {
 		$('#create').click(function() {
 			socket.emit('new-game');
 		});

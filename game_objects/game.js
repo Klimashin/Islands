@@ -1,3 +1,5 @@
+var randomizer = require('../lib/random_generator');
+
 var World = require('./world');
 var EventEmitter = require("events").EventEmitter;
 var gameId = 0;
@@ -10,7 +12,7 @@ function Game(io, player) {
 	this.ee = new EventEmitter();
 	this.io = io;
 	this.creator = player;
-	this['id'] = gameId++;
+	this['id'] = randomizer.generateRandomString();
 	this.started = false;
 	this.players = [];
 
@@ -30,6 +32,7 @@ function Game(io, player) {
 Game.prototype.addPlayer = function(player) {
 	console.log('joined player ' + player.socket.id)
 	this.players.push(player);
+	player.gameId = this.id;
 }
 
 Game.prototype.endTurn = function() {
