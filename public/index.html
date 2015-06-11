@@ -2,60 +2,15 @@
 <html>
 <head>
 	<script src="/socket.io/socket.io.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-	<script src="client_engine.js"></script>
-	<script src="layout_controller.js"></script>
+	<script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script src="client_engine.js"></script>	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script type="text/jsx" src="layout_controller.js"></script>
 </head>
 <body>
-	<h1>TEST</h1>
-	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registrationModal">Войти в Гостевую</button>
-	<!-- Modal -->
-	<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Вход в гостевую комнату</h4>
-	      </div>
-	      <div class="modal-body">
-	        <form>
-			  <div class="form-group">
-			    <label for="userNickInput">Под этим именем другие игроки будут видеть вас в течение данной игровой сессии</label>
-			    <input type="email" class="form-control" id="userNickInput" placeholder="Введите ник">
-			  </div>
-		  	</form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">Продолжить</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+	
 </body>
-<script>
-	var socket = io();
-	var layoutController = new LayoutController();
-	var gameClient = new ClientEngine(socket);	
-
-	$(function() {
-		gameClient.initListners();
-
-		$('#registrationModal .modal-footer>button').click(function() {
-			var nick = $('#userNickInput').val();
-			if (nick) {
-				gameClient.registerPlayer(nick);
-				$('#registrationModal').modal('hide').one('hidden.bs.modal', function() {
-					
-				});
-			} else {
-				$('#userNickInput').popover({
-					'content': "Напиши какой-нибудь ник",
-					'placement': 'top'
-				}).popover('show');
-			}
-		});
-	});
-</script>
 </html>
