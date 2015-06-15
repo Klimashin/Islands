@@ -12,8 +12,6 @@ var ClientEngine = function(socket) {
 	}
 
 	this.initListners = function() {
-		this.registerPlayer('TestNick');
-
 		$('#create').click(function() {
 			socket.emit('new-game');
 		});
@@ -32,7 +30,7 @@ var ClientEngine = function(socket) {
 	}
 
 	socket.on('game-message', function(message) {
-		$(document).trigger('game-console-message', {text: message});
+		$(document).trigger('game-console:message', {text: message});
 	});
 
 	socket.on('assign-game-id', function(gameId) {
