@@ -37,24 +37,25 @@ var PlayersList = React.createClass({
 	},
 
 	componentDidMount: function() {
-		$(document).on('update-players-list', function(e, players) {
-			this.setState({data: players});
+		$(document).on('update-players-list', function(e, data) {
+			this.setState({'data': data.nicks});
 		}.bind(this));
 	},
 
 	render: function() {
-		var players = this.state.data.map(function(player) {
+		var players = this.state.data.map(function(playerNick) {
+			console.log('here', playerNick);
 			return (
 				<span className="player">
-					{player.nick}
+					{playerNick}
 				</span>
 			);
-		});
+		});		
 
 		return (
 			<div>
 				<h2>Players List</h2>
-				<div className="players-list" data={this.props.data}>
+				<div className="players-list">
 					{players}
 				</div>
 			</div>
@@ -118,7 +119,8 @@ var PlayerControls = React.createClass({
 	},
 
 	render: function() {
-		switch (this.state.condition) {
+		console.log(this.state);
+		switch (this.state.condition) {			
 			case 'registered':
 				return (
 					<div>
@@ -138,7 +140,8 @@ var PlayerControls = React.createClass({
 var RegisterForm = React.createClass({
 	handleSubmit: function(e) {
 		e.preventDefault();
-		var nick = React.findDOMNode(this.refs.nick).value.trim();
+		e.stopPropagation();
+		var nick = React.findDOMNode(this.refs.nick).value;
 
 		if (nick) {
 			gameClient.registerPlayer(nick);
@@ -159,8 +162,6 @@ var socket = io();
 var gameClient = new ClientEngine(socket);	
 
 $(function() {
-	gameClient.initListners();
-
 	React.render(
 		<div>
 			<PlayerControls data={[]}/>

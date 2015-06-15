@@ -11,26 +11,17 @@ var ClientEngine = function(socket) {
 		this.socket.emit('register', nick);
 	}
 
-	this.initListners = function() {
-		$('#create').click(function() {
-			socket.emit('new-game');
-		});
-
-		$('#join').click(function() {
-			socket.emit('join-game', 0);
-		});
-
-		$('#change-state').click(function() {
-			socket.emit('change-ready-state');
-		});
-
-		$('#start').click(function() {
-			socket.emit('start-game', self.currentGameId);
-		});
-	}
-
 	socket.on('game-message', function(message) {
 		$(document).trigger('game-console:message', {text: message});
+	});
+
+	socket.on('registration-success', function(data) {
+		$(document).trigger('registration-success', data);
+	});
+
+	socket.on('update-players-list', function(playersList) {
+		console.log(playersList);
+		$(document).trigger('update-players-list', playersList);
 	});
 
 	socket.on('assign-game-id', function(gameId) {
