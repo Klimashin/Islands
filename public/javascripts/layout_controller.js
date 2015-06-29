@@ -12,9 +12,9 @@ var GameConsole = React.createClass({
 	},
 
 	render: function() {
-		var messages = this.state.data.map(function (message) {
+		var messages = this.state.data.map(function ( message, i) {
 			return (
-				<span className="console-message">
+				<span className="console-message" key={i}>
 					{message.text}
 				</span>
 			);
@@ -43,10 +43,9 @@ var PlayersList = React.createClass({
 	},
 
 	render: function() {
-		var players = this.state.data.map(function(playerNick) {
-			console.log('here', playerNick);
+		var players = this.state.data.map(function(playerNick, i) {
 			return (
-				<span className="player">
+				<span className="player" key={i}>
 					{playerNick}
 				</span>
 			);
@@ -99,62 +98,6 @@ var Game = React.createClass({
 				<span>{this.data.gamaeId}</span>
 			</div>
 		)
-	}
-});
-
-var PlayerControls = React.createClass({
-	getInitialState: function() {
-		return {'condition': 'not-registered'};
-	},
-
-	componentDidMount: function() {
-		$(document).on('registration-success', function(e, data) {
-			this.setState({
-				condition: 'registered',
-				'data': {
-					nick: data.nick
-				}
-			})
-		}.bind(this));
-	},
-
-	render: function() {
-		console.log(this.state);
-		switch (this.state.condition) {			
-			case 'registered':
-				return (
-					<div>
-						<span>You are registered now, your Nick is {this.state.data.nick}</span>
-					</div>
-				);
-
-			default:
-				return (
-					<RegisterForm/>
-				);
-		}
-		
-	}
-});
-
-var RegisterForm = React.createClass({
-	handleSubmit: function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		var nick = React.findDOMNode(this.refs.nick).value;
-
-		if (nick) {
-			gameClient.registerPlayer(nick);
-		}		
-	},
-
-	render: function() {
-		return (
-			<form className="playerRegisterForm" onSubmit={this.handleSubmit}>
-				<input type="text" placeholder="Enter your Nick" ref="nick" />
-				<input type="submit" value="Register" />
-			</form>
-		); 
 	}
 });
 

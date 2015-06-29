@@ -9,6 +9,7 @@
     "node-uuid": "^1.4.3",
     "session.socket.io": "*",
     "socket.io": "~1.0.0",
-    "stochasm": "~0.5"
+    "stochasm": "~0.5",
+    "babel": "^5.6.14"
   }
 }
