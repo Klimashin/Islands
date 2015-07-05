@@ -8,6 +8,7 @@ global.resourcesData = JSON.parse(fs.readFileSync('./data/resources.json', 'utf8
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
+var gameServer = require('./lib/game_server');
 
 app.use(express.static('public'));
 
@@ -23,5 +24,4 @@ http.listen(3000, function(){
 	console.log('listening on *:3000');
 });
 
-var gameServer = require('./lib/game_server');
 gameServer.listen(http);

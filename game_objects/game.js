@@ -5,32 +5,26 @@ var EventEmitter = require("events").EventEmitter;
 var gameId = 0;
 
 worldConfig = {
-	islandsNum: 10
+	islandCreationChance: 1
 }
 
-function Game(io, player) {
+function Game(io) {
 	this.ee = new EventEmitter();
 	this.io = io;
-	this.creator = player;
 	this['id'] = randomizer.generateRandomString();
 	this.started = false;
 	this.players = [];
-
-	this.addPlayer(player);
 
 	this.world = new World(worldConfig, this.ee);
 	this.turn = 0;
 	this.messages = '';
 
-	this.ee.on('islandHaveFallen', this.processIslandHaveFallen.bind(this));
-
-	this.ee.on('gameLose', this.processGameLose.bind(this));
-
-	this.ee.on('islandClimateZoneChanged', this.processClimateZoneChanged.bind(this));
+	this.ee.on('island:destroy', this.processIslandHaveFallen.bind(this));
+	this.ee.on('island:climate-zone-changed', this.processClimateZoneChanged.bind(this));
 }
 
 Game.prototype.addPlayer = function(player) {
-	console.log('joined player ' + player.socket.id)
+	console.log('joined player ' + player.socket.id);
 	this.players.push(player);
 	player.gameId = this.id;
 }
@@ -38,7 +32,7 @@ Game.prototype.addPlayer = function(player) {
 Game.prototype.endTurn = function() {
 	//end turn related logic
 	this.turn++;
-	this.ee.emit('turnPassed', this.turn);
+	this.world.processEndOfTurn();
 }
 
 Game.prototype.processIslandHaveFallen = function(islandId) {
@@ -56,7 +50,7 @@ Game.prototype.processClimateZoneChanged = function (data) {
 
 Game.prototype.start = function() {
 	this.started = true;
-	console.log('game started');
+
 	for (id in this.players) {
 		this.players[id].socket.emit('game-message', 'GAME STARTED');
 	}

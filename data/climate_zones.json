@@ -42,5 +42,41 @@
 	"11":{
 		"modifier": "5",
 		"name": "zone11" 
-	}
+	},
+	"12":{
+		"modifier": "5",
+		"name": "zone12" 
+	},
+	"13":{
+		"modifier": "5",
+		"name": "zone13" 
+	},
+	"14":{
+		"modifier": "5",
+		"name": "zone14" 
+	},
+	"15":{
+		"modifier": "5",
+		"name": "zone15" 
+	},
+	"16":{
+		"modifier": "5",
+		"name": "zone16" 
+	},
+	"17":{
+		"modifier": "5",
+		"name": "zone17" 
+	},
+	"18":{
+		"modifier": "5",
+		"name": "zone18" 
+	},
+	"19":{
+		"modifier": "5",
+		"name": "zone19" 
+	},
+	"20":{
+		"modifier": "5",
+		"name": "zone20" 
+	},
 }
