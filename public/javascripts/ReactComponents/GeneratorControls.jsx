@@ -53,9 +53,9 @@ ClimateZonesList = React.createClass({
 
 	render: function () {
 		if (this.props.data) {
-			var climateZones = this.props.data.map(function (zoneData) {
+			var climateZones = $.map(this.props.data, function (zoneData) {
 				return (
-					<ClimateZone dataIslands={zoneData.islands} dataName={zoneData.zoneName} dataNumber={zoneData.num}/>
+					<ClimateZone dataIslands={zoneData.islands} dataName={zoneData.name} dataNumber={zoneData.zoneId}/>
 				);
 			});
 		}

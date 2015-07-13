@@ -40,7 +40,31 @@ World.prototype.processEndOfTurn = function() {
 World.prototype.getRepresentation = function() {
 	var representation = {};
 
-	for ()
-} 
+	for (id in this.climateZones) {
+		var islands = this.islands.filter(function(island) {
+			return island.climateZone.zoneId == id;
+		});
+
+		islandsRepresantion = islands.map(function (island) {
+			return {
+				'turnsToFall': island.timeToLive,
+				'island-name': 'nameNotSet',
+				'tooltip': {
+					'plains' : island._plains,
+					'mountains': island._mountains,
+					'snow': island._snow,
+					'special': island._specialRes,
+					'size': island.size,
+					'fallingSpeed': island.fallingSpeed
+				}
+			}
+		});
+
+		this.climateZones[id].islands = islandsRepresantion;
+		representation[id] = this.climateZones[id];
+	}
+
+	return representation;
+}
 
 module.exports = World;
