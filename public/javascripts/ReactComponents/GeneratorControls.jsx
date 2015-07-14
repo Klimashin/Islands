@@ -23,8 +23,8 @@ GeneratorControls = React.createClass({
 Island = React.createClass({
 	render: function () {
 		return (
-			<div rel="tooltip" className="isalnd" data-toggle="tooltip" data-placement="top" title={this.props.tooltip} data-html="true">
-				<span>{this.props['name']} : {this.props.turnsToFall}</span>
+			<div rel="tooltip" className="island" data-toggle="tooltip" data-placement="top" title={JSON.stringify(this.props.data.tooltip)} data-html="true">
+				<span>{this.props.data['island-name']} : {this.props.data.turnsToFall}</span>
 			</div>
 		);
 	}
@@ -38,6 +38,7 @@ ClimateZone = React.createClass({
 
 		return (
 			<div className="climateZone">
+				<span>{this.props.dataName}:</span>
 				{islands}
 			</div>
 		);
@@ -62,7 +63,7 @@ ClimateZonesList = React.createClass({
 
 		return (
 			<div>
-				{climateZones}
+				{climateZones.reverse()}
 			</div>
 		);
 	}

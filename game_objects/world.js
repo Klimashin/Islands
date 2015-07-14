@@ -48,7 +48,7 @@ World.prototype.getRepresentation = function() {
 		islandsRepresantion = islands.map(function (island) {
 			return {
 				'turnsToFall': island.timeToLive,
-				'island-name': 'nameNotSet',
+				'island-name': 'Island ' + island.id,
 				'tooltip': {
 					'plains' : island._plains,
 					'mountains': island._mountains,

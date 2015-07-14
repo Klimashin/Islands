@@ -1,3 +1,19 @@
 .console-message {
 	display: block;
 }
+
+.island {
+	width: 100px;
+	height: 20px;
+	color: white;
+	background-color: brown;
+	display: inline-block;
+	margin-right: 10px;
+	cursor: hover;
+}
+
+.climateZone {
+	height: auto;
+	width: 1000px;
+	margin: 10px 0;
+}
